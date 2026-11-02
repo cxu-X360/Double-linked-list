@@ -32,5 +32,9 @@ int verificator(List* lst)
 		return ARRAY_NULL_PTR;
 	}
 
+	if ()
+
+
+
 	return 0;
 }

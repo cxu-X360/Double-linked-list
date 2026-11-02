@@ -30,6 +30,24 @@ int main()
 		list_pushfront(&main_list, (double) i);
 	}
 
+	list_insert(&main_list, 6, 68.99);
+	list_insert(&main_list,	7, 78.99);
+	list_insert(&main_list, 8, 88.99);
+
+	print_list(&main_list);
+
+	double temp1 = NAN;
+	list_popback(&main_list, &temp1);
+	print_list(&main_list);
+
+	double temp2 = NAN;
+	list_popfront(&main_list, &temp2);
+	print_list(&main_list);
+	
+	double temp3 = NAN;
+	list_delete(&main_list, 26, &temp3);
+	print_list(&main_list);
+
 	list_destroy(&main_list);
 
 	END_FUNC

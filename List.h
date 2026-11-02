@@ -57,6 +57,7 @@ int list_popback(List* lst, double* value);
 int list_popfront(List* lst, double* value);
 
 size_t list_len(List* lst);
+void print_list(List* lst);
 void traverse_list(List* lst, void (*func) (void*));
 
 #endif

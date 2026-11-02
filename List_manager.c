@@ -97,12 +97,11 @@ void print_list(List* lst)
 	printf("size = %zu, cap = %zu\n",lst->size, lst->capacity);
 	printf("head = [%zu], tail = [%zu]\n", lst->next[0], lst->prev[0]);
 
-	while (pointer < 50)
+	do
 	{
-		
 		printf("pointer = [%zu]|<val = %lg, next_ptr = %zu, prev_ptr = %zu>\n", pointer, lst->values[pointer], lst->next[pointer], lst->prev[pointer]);
-		pointer++;
-	}
+		pointer = lst->next[pointer];
+	} while (pointer != 0);
 }
 
 //ADD segment
