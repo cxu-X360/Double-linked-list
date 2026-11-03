@@ -21,6 +21,7 @@ enum ERRNO
 	ARRAY_NULL_PTR = -4,
 	LIST_OVERFLOW = -5,
 	LIST_UNDERFLOW = -6,
+	FREE_OUT_OF_RANGE = -7,
 
 };
 
@@ -39,11 +40,15 @@ typedef struct
 	size_t capacity;
 	size_t size;
 
-	ssize_t free_el; //индекс первой свободной ячейки
+	ssize_t last_free; //указатель на  первой свободной ячейки
 
 } List;
 
+void graph_script_generate(List* lst);
+
 int verificator(List* lst);
+void print_list(List* lst);
+
 
 int list_init(List* lst, size_t start_cap);
 int list_destroy(List* lst);

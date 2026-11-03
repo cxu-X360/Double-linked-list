@@ -20,12 +20,12 @@ int main()
 
 	list_init(&main_list, 10);
 
-	for (int i = 0; i < 25; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		list_pushback(&main_list, (double) i);
 		//traverse_list(&main_list, print_double);
 	}
-	for (int i = 25; i < 50; i++)
+	for (int i = 5; i < 15; i++)
 	{
 		list_pushfront(&main_list, (double) i);
 	}
@@ -45,8 +45,10 @@ int main()
 	print_list(&main_list);
 	
 	double temp3 = NAN;
-	list_delete(&main_list, 26, &temp3);
+	list_delete(&main_list, 13, &temp3);
 	print_list(&main_list);
+
+	graph_script_generate(&main_list);
 
 	list_destroy(&main_list);
 

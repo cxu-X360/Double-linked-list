@@ -3,7 +3,7 @@
 
 //SERVICE segment
 //-----------------------------------------------------------------------------------------------------------------------------
-void _fill_poison(List* lst)
+static void _fill_poison(List* lst)
 {
 	for (size_t i = lst->size + 1; i < lst->capacity; i++)
 	{
@@ -15,7 +15,7 @@ void _fill_poison(List* lst)
 	}
 }
 
-size_t _find_el(List* lst, size_t index)
+static size_t _find_el(List* lst, size_t index)
 {
 	//verif
 	size_t pointer = 0;
@@ -45,7 +45,7 @@ int list_init(List* lst, size_t start_capacity)
 				   .next =   calloc(start_capacity, sizeof(size_t)),   
 				   .capacity = start_capacity,
 				   .size = 0,
-				   .free_el = -1};
+				   .last_free = -1};
 	//verif
 
 	_fill_poison(lst);
@@ -82,27 +82,16 @@ void traverse_list(List* lst, void (*func) (void*))
 	//verif
 	size_t pointer = 0;
 
-	while (pointer  != 0)
+	do
 	{
 		pointer = lst->next[pointer];
 		func(&(lst->values[pointer]));
-	} 
+	} while (pointer  != 0);
 
 	puts("\ntraverse ended.\n");
 }
 
-void print_list(List* lst)
-{
-	size_t pointer = 0;
-	printf("size = %zu, cap = %zu\n",lst->size, lst->capacity);
-	printf("head = [%zu], tail = [%zu]\n", lst->next[0], lst->prev[0]);
 
-	do
-	{
-		printf("pointer = [%zu]|<val = %lg, next_ptr = %zu, prev_ptr = %zu>\n", pointer, lst->values[pointer], lst->next[pointer], lst->prev[pointer]);
-		pointer = lst->next[pointer];
-	} while (pointer != 0);
-}
 
 //ADD segment
 //-----------------------------------------------------------------------------------------------------------------------------
@@ -125,10 +114,10 @@ int _add_element(List* lst, size_t prev_ptr,  double val)
 	START_FUNC
 
 	size_t pointer = 0;
-	if (lst->free_el >= 0)
+	if (lst->last_free >= 0)
 	{
-		pointer = lst->free_el;
-		lst->free_el = lst->next[lst->free_el];
+		pointer = lst->last_free;
+		lst->last_free = lst->next[lst->last_free];
 	}
 	else pointer = lst->size + 1;
 
@@ -154,7 +143,7 @@ int list_pushback(List* lst, double val)
 	//verif
 
 	if ((lst->size + 1) == lst->capacity) list_resize_up(lst);
-	print_list(lst);
+	//print_list(lst);
 
 	size_t tail = lst->prev[0];
 	printf("tail = %zu\n", tail);
@@ -174,7 +163,7 @@ int list_pushfront(List* lst, double val)
 	
 
 	_add_element(lst, 0, val);
-	print_list(lst);
+	//print_list(lst);
 
 	//verif
 	return 0;
@@ -207,8 +196,8 @@ int _delete_element(List* lst, size_t pointer, double* val)
 	lst->next[lst->prev[pointer]] = lst->next[pointer];
 	lst->prev[lst->next[pointer]] = lst->prev[pointer];
 
-	lst->next[pointer] = lst->free_el;
-	lst->free_el = pointer;
+	lst->next[pointer] = lst->last_free;
+	lst->last_free = pointer;
 	lst->prev[pointer] = INT_PZ;
 
 	lst->size--;
