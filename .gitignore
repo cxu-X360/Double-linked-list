@@ -1,3 +1,5 @@
 test_graph
 .out
 .exe
+.dot
+.png
