@@ -47,12 +47,11 @@ digraph List
 	"node_3" -> "node_1" [style=dashed, penwidth=1.6];
 	node_4 [label="{ #4 | { prev=3 | next=0 | val=3 } }"];
 	"node_4" -> "node_3" [style=dashed, penwidth=1.6];
-	node_2 [label="{ #2 | {next=15 | val=NAN } }", fillcolor="#36343b"];
+	node_2 [label="{ #2 | {next=15 | OLD_val=1 } }", fillcolor="#36343b"];
 	"node_2" -> "node_15" [penwidth=1.6, style=dotted, color="#36343b"];
-	node_15 [label="{ #15 | {next=5 | val=NAN } }", fillcolor="#36343b"];
+	node_15 [label="{ #15 | {next=5 | OLD_val=14 } }", fillcolor="#36343b"];
 	"node_15" -> "node_5" [penwidth=1.6, style=dotted, color="#36343b"];
-	node_5 [label="{ #5 | {next=-1 | val=NAN } }", fillcolor="#36343b"];
-	"node_5" -> "node_-1" [penwidth=1.6, style=dotted, color="#36343b"];
-"Main List" -> "node_14" [label="HEAD", color=black, fontcolor=red, penwidth=1.6];
+	node_5 [label="{ #5 | {next=-1 | OLD_val=4 } }", fillcolor="#36343b"];
+"Main List" -> "node_14" [label="HEAD", color=black, fontcolor=black, penwidth=1.6];
 "Main List" -> "node_2" [label="FREE", style=dotted, color="#36343b" fontcolor="#36343b", penwidth=1.6];
 }

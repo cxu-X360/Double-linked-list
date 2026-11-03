@@ -1,6 +1,7 @@
 #include "List.h"
 
 #define FREE_COLOR "\"#36343b\""
+#define LAST_DELETE_COLOR "\"383838\""
 #define NODE_COLOR "blue"
 #define BORDER_COLOR "white"
 
@@ -44,17 +45,24 @@ static void _create_free_list(GrContext* ctx)
 
 	while (pointer > 0)
 	{
-		fprintf(ctx->file, "\tnode_%lld [label=\"{ #%lld | {next=%lld | val=NAN } }\", fillcolor=%s];\n", 
-			pointer, pointer, ctx->lst->next[pointer], FREE_COLOR); //Free_node
-		fprintf(ctx->file, "\t\"node_%lld\" -> \"node_%lld\" [penwidth=1.6, style=dotted, color=%s];\n",
-			pointer, ctx->lst->next[pointer], FREE_COLOR);
+		fprintf(ctx->file, "\tnode_%lld [label=\"{ #%lld | {next=%lld | OLD_val=%lg } }\", fillcolor=" FREE_COLOR"];\n", 
+			pointer, pointer, ctx->lst->next[pointer], ctx->lst->values[pointer]); //Free_node
+
+		if ((ssize_t) ctx->lst->next[pointer] > 0)
+		{
+			fprintf(ctx->file, "\t\"node_%lld\" -> \"node_%lld\" [penwidth=1.6, style=dotted, color="FREE_COLOR"];\n",
+					pointer, ctx->lst->next[pointer]);
+		}
+		
 		pointer = ctx->lst->next[pointer];
 	}
+
+
 }
 
 static void _create_main_pointers(GrContext* ctx)
 {
-	fprintf(ctx->file, "\"Main List\" -> \"node_%zu\" [label=\"HEAD\", color=black, fontcolor=red, penwidth=1.6];\n",
+	fprintf(ctx->file, "\"Main List\" -> \"node_%zu\" [label=\"HEAD\", color=black, fontcolor=black, penwidth=1.6];\n",
 			ctx->lst->next[0]);
 
 	fprintf(ctx->file, "\"Main List\" -> \"node_%zu\" [label=\"FREE\", style=dotted, color=%s fontcolor=%s, penwidth=1.6];\n",
@@ -65,7 +73,7 @@ static void _create_main_pointers(GrContext* ctx)
 
 void graph_script_generate(List* lst)
 {
-	FILE* graph_script = fopen("graph.dot", "w");	
+	FILE* graph_script = fopen("logs/graph.dot", "w");	
 	GrContext ctx = {.lst = lst, .file = graph_script};	
 
 	//char* buffer = calloc(START_BUFF_CAP, sizeof(char));

@@ -109,7 +109,7 @@ int list_resize_up(List* lst)
 	return 0;
 }
 
-int _add_element(List* lst, size_t prev_ptr,  double val)
+static int _add_element(List* lst, size_t prev_ptr,  double val)
 {
 	START_FUNC
 
@@ -188,10 +188,9 @@ int list_insert(List* lst, size_t index, double val)
 
 //DELETE segment
 //------------------------------------------------------------------------------------------------------------------------------
-int _delete_element(List* lst, size_t pointer, double* val)
+static int _delete_element(List* lst, size_t pointer, double* val)
 {
 	*val = lst->values[pointer];
-	lst->values[pointer] = NAN;
 
 	lst->next[lst->prev[pointer]] = lst->next[pointer];
 	lst->prev[lst->next[pointer]] = lst->prev[pointer];

@@ -5,10 +5,11 @@ pause()
 }
 
 clear
-gcc main.c List_manager.c debug_manager.c graph_manager.c -o main.out
+gcc main.c src/List_manager.c src/debug_manager.c src/graph_manager.c -o main.out
 pause
 time ./main.out
+subl logs/graph.dot
 
-subl graph.dot
-dot -Tpng graph.dot -o graph.png
-gwenview ./graph.png
+dot -Tpng logs/graph.dot -o logs/graph.png
+pause
+gwenview logs//graph.png
