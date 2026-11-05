@@ -83,9 +83,6 @@ void graph_script_generate(List* lst, size_t* dump_file_num)
 	printf("%s opened\n", file_name);
 	GrContext ctx = {.lst = lst, .file = graph_script};	
 
-	//char* buffer = calloc(START_BUFF_CAP, sizeof(char));
-
-
 	_create_head_info(&ctx);
 
 	fprintf(ctx.file, "\"Main List\" [label=\"{My List | { size=%zu | cap=%zu | last_free=%zu} | {%lg}}\", fillcolor=\"#4f378b\",penwidth=1.4];\n",
