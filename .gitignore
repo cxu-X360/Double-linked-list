@@ -3,3 +3,4 @@ test_grapg
 *.exe
 *.dot
 *.png
+example_graph.dot
