@@ -1,6 +1,8 @@
 test_grapg
+trash
+dot_files
 *.out
 *.exe
 *.dot
 *.png
-example_graph.dot
+test.c

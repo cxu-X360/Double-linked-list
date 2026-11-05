@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <stddef.h>
 #include <string.h>
 
 #define LIST_DEBUG
@@ -25,7 +24,6 @@ enum ERRNO
 	LIST_OVERFLOW = -5,
 	LIST_UNDERFLOW = -6,
 	FREE_OUT_OF_RANGE = -7,
-
 };
 
 #ifdef LIST_DEBUG
@@ -47,7 +45,7 @@ typedef struct
 
 } List;
 
-void graph_script_generate(List* lst, size_t* dump_file_num);
+void graph_script_generate(List* lst, int* dump_file_num);
 
 int verificator(List* lst);
 void print_list(List* lst);

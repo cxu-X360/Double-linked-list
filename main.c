@@ -8,7 +8,7 @@ int main()
 
 	list_init(&main_list, 10);
 	
-	size_t dump_file_num = 1;
+	int dump_file_num = 1;
 
 	for (int i = 0; i < 5; i++)
 	{

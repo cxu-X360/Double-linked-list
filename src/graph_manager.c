@@ -1,5 +1,6 @@
 #include "List.h"
 
+
 #define FREE_COLOR "\"#36343b\""
 #define LAST_DELETE_COLOR "\"383838\""
 #define NODE_COLOR "blue"
@@ -69,15 +70,10 @@ static void _create_main_pointers(GrContext* ctx)
 			ctx->lst->last_free, FREE_COLOR, FREE_COLOR);
 }
 
-static size_t _reverse_num(size_t dump_file_num)
-{
-
-}
-
-void graph_script_generate(List* lst, size_t* dump_file_num)
+void graph_script_generate(List* lst, int* dump_file_num)
 {
 	char file_name[MAX_FILENAME_SIZE] = {};
-	snprintf(file_name, MAX_FILENAME_SIZE - 1, "./logs/dot-files/graph_code_%zu.dot", *dump_file_num);
+	snprintf(file_name, MAX_FILENAME_SIZE - 1, "./logs/dot-files/graph_code_%d.dot", *dump_file_num); //(int) ceil(log10((double) *dump_file_num)) + 1
 
 	FILE* graph_script = fopen(file_name, "w");	
 	printf("%s opened\n", file_name);
