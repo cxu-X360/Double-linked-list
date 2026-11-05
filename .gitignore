@@ -6,4 +6,4 @@ dot_files
 *.dot
 *.png
 test.c
-test_looper.sh
+logs/test_looper.sh
