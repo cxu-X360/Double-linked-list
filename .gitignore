@@ -1,5 +1,5 @@
 test_grapg
-.out
-.exe
-.dot
-.png
+*.out
+*.exe
+*.dot
+*.png
