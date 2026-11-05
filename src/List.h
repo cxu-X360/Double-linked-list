@@ -4,11 +4,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stddef.h>
+#include <string.h>
 
 #define LIST_DEBUG
 
 #define INT_PZ 111111
 #define NUL_EL_VAL 6.02e23
+#define MAX_FILENAME_SIZE 64
 
 #define START_FUNC printf("%s started\n", __FUNCTION__ );
 #define END_FUNC printf("%s ended\n", __FUNCTION__);
@@ -44,7 +47,7 @@ typedef struct
 
 } List;
 
-void graph_script_generate(List* lst);
+void graph_script_generate(List* lst, size_t* dump_file_num);
 
 int verificator(List* lst);
 void print_list(List* lst);

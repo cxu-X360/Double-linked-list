@@ -15,7 +15,7 @@ static void _create_head_info(GrContext* ctx)
 {
 	fprintf(ctx->file, 
 		"digraph List\n{\n"
-		"\tgraph [rankdir=LR, bgcolor=\"#FDE3FF\", pad=0.25, nodesep=0.25, ranksep=0.35];\n" //Pink background
+		"\tgraph [rankdir=LR, bgcolor=\"#FAE3FF\", pad=0.25, nodesep=0.25, ranksep=0.35];\n" //Pink background
 		"\tnode [shape=record, style=\"rounded,filled\", fontname=\"monospace\", fontsize=10, fontcolor=white, color="BORDER_COLOR" fillcolor="NODE_COLOR", penwidth=1.3, margin=\"0.13,0.06\"];\n"
 		"\tedge [color=black, arrowsize=0.75, fontname=\"monospace\", fontsize=9, penwidth=1.3]\n;"
 	);
@@ -69,11 +69,18 @@ static void _create_main_pointers(GrContext* ctx)
 			ctx->lst->last_free, FREE_COLOR, FREE_COLOR);
 }
 
-
-
-void graph_script_generate(List* lst)
+static size_t _reverse_num(size_t dump_file_num)
 {
-	FILE* graph_script = fopen("logs/graph.dot", "w");	
+
+}
+
+void graph_script_generate(List* lst, size_t* dump_file_num)
+{
+	char file_name[MAX_FILENAME_SIZE] = {};
+	snprintf(file_name, MAX_FILENAME_SIZE - 1, "./logs/dot-files/graph_code_%zu.dot", *dump_file_num);
+
+	FILE* graph_script = fopen(file_name, "w");	
+	printf("%s opened\n", file_name);
 	GrContext ctx = {.lst = lst, .file = graph_script};	
 
 	//char* buffer = calloc(START_BUFF_CAP, sizeof(char));
@@ -106,4 +113,5 @@ void graph_script_generate(List* lst)
 
 	fprintf(ctx.file, "}\n");
 	fclose(ctx.file);
+	(*dump_file_num)++;
 }
