@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 
     for (int i = 1; i <= num_files; i++)
     {
-        fprintf(log_file, "\t\t<img src=\"%sgraph_pict_%d.png\" alt=\"List_%d can\'t display\">\n", directory, i, i);
+        fprintf(log_file, "\t\t<img src=\"%sgraph_pict_%d.png\" alt=\"List_%d can\'t display\">\n\t\t<br>\n", directory, i, i);
     }
     
 

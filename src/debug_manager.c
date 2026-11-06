@@ -24,51 +24,59 @@ void print_list(List* lst)
 	printf("End of dump\n");
 }
 
-int verificator(List* lst)
+void verificator(List* lst)
 {
 	if (lst->capacity <= 0)
 	{
 		fprintf(stderr, "capacity < 0 error\n");
-		return LESS_ZERO_CAPACITY;
+		lst->error = LESS_ZERO_CAPACITY;
+		return;
 	}
 
 	if (lst->size < 0)
 	{
 		fprintf(stderr, "size < 0 error\n");
-		return LESS_ZERO_SIZE;
+		lst->error = LESS_ZERO_SIZE;
+		return;
 	}
 
 	if (lst->values == NULL)
 	{
 		fprintf(stderr, "null val ptr error\n");
-		return ARRAY_NULL_PTR;
+		lst->error= ARRAY_NULL_PTR;
+		return;
 	}
 
 	if (lst->prev == NULL)
 	{
 		fprintf(stderr, "null prev ptr error\n");
-		return ARRAY_NULL_PTR;
+		lst->error = ARRAY_NULL_PTR;
+		return;
 	}
 
 	if (lst->next == NULL)
 	{
 		fprintf(stderr, "null next ptr error\n");
-		return ARRAY_NULL_PTR;
+		lst->error = ARRAY_NULL_PTR;
+		return;
 	}
 
 	if (lst->size > lst->capacity)
 	{
 		fprintf(stderr, "List Overflow error\n");
-		return LIST_OVERFLOW;
+		lst->error = LIST_OVERFLOW;
+		return;
 	}
 	
-	if (lst->last_free < -1 || lst->last_free == 0  || lst->last_free >= lst->capacity)
+	if (lst->last_free < -1 || lst->last_free == 0  || lst->last_free >= (ssize_t) lst->capacity)
 	{
 		fprintf(stderr, "free pointer out of range\n");
-		return FREE_OUT_OF_RANGE;
+		lst->error = FREE_OUT_OF_RANGE;
+		return;
 	}
 
-	return 0;
+	lst->error = 0;
+	return;
 }
 
 

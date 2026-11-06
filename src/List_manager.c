@@ -1,6 +1,8 @@
 #include "List.h"
 
 
+
+
 //SERVICE segment
 //-----------------------------------------------------------------------------------------------------------------------------
 static void _fill_poison(List* lst)
@@ -45,7 +47,9 @@ int list_init(List* lst, size_t start_capacity)
 				   .next =   calloc(start_capacity, sizeof(size_t)),   
 				   .capacity = start_capacity,
 				   .size = 0,
-				   .last_free = -1};
+				   .last_free = -1,
+				   .last_used = 0,
+				   .error = 0};
 	//verif
 
 	_fill_poison(lst);
@@ -130,6 +134,7 @@ static int _add_element(List* lst, size_t prev_ptr,  double val)
 	lst->next[prev_ptr] = pointer;
 	
 	lst->size++;
+	lst->last_used = lst->next[prev_ptr];
 
 	END_FUNC
 
@@ -200,6 +205,7 @@ static int _delete_element(List* lst, size_t pointer, double* val)
 	lst->prev[pointer] = INT_PZ;
 
 	lst->size--;
+	lst->last_used = pointer;
 
 	return 0;
 }

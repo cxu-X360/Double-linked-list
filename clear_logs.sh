@@ -13,3 +13,5 @@ clear
 clear_dir "logs/pictures/"
 clear_dir "logs/dot-files/"
 rm logs/*.html
+rm create_html.out
+rm main.out

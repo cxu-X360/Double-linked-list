@@ -24,7 +24,9 @@ enum ERRNO
 	LIST_OVERFLOW = -5,
 	LIST_UNDERFLOW = -6,
 	FREE_OUT_OF_RANGE = -7,
+	COUNT_ERRORS,
 };
+
 
 #ifdef LIST_DEBUG
 	#define ON_DEBUG(...) __VAR_ARGS__
@@ -42,12 +44,15 @@ typedef struct
 	size_t size;
 
 	ssize_t last_free; //указатель на  первой свободной ячейки
+	size_t last_used;
+	enum ERRNO error;
 
 } List;
 
+
 void graph_script_generate(List* lst, int* dump_file_num);
 
-int verificator(List* lst);
+void verificator(List* lst);
 void print_list(List* lst);
 
 
